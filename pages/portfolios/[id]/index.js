@@ -9,10 +9,6 @@ const Portfolio = ({portfolio}) => {
   const { data: dataU, loading: loadingU } = useGetUser()
   const router = useRouter()
 
-  if (router.isFallback) {
-    return <h1>Your page is getting served</h1>
-  }
-
   return (
     <BaseLayout
       navClass="transparent" 
@@ -22,8 +18,8 @@ const Portfolio = ({portfolio}) => {
       <BasePage 
         noWrapper
         indexPage
-        title={`${portfolio.title} - Maryna`}
-        metaDescription={portfolio.description}
+        title={router.isFallback ? 'My portfolio' : `${portfolio.title} - Maryna`}
+        metaDescription={router.isFallback ? 'description' : portfolio.description}
       >
         <div className="portfolio-detail">
           <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">

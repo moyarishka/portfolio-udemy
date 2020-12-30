@@ -11,14 +11,11 @@ const BlogDetail = ({blog, author}) => {
   const { data, loading } = useGetUser()
   const router = useRouter()
 
-  if (router.isFallback) {
-    return <h1>Your page is getting served</h1>
-  }
   return (
     <BaseLayout user={data} loading={loading}>
       <BasePage 
-        title={`${blog.title} - Maryna`}
-        metaDescription={blog.subTitle}
+        title={router.isFallback ? "Maryna's Blog" : `${blog.title} - Maryna`}
+        metaDescription={router.isFallback ? "Maryna's Blog" : blog.subTitle}
         className="slate-container"
       >
         {router.isFallback &&
