@@ -11,9 +11,6 @@ const BlogDetail = ({blog, author}) => {
   const { data, loading } = useGetUser()
   const router = useRouter()
 
-  if (router.isFallback) {
-    return <h1>Your page is getting served</h1>
-  }
   return (
     <BaseLayout user={data} loading={loading}>
       <BasePage 
@@ -21,17 +18,22 @@ const BlogDetail = ({blog, author}) => {
         metaDescription={blog.subTitle}
         className="slate-container"
       >
-        <Row>
-          <Col md={{size: 8, offset: 2}}>
-            <Avatar
-              title={author.name}
-              image={author.picture}
-              date={blog.createdAt}
-            />
-            <hr/>
-            <SlateView initialContent={blog.content}/>
-          </Col>
-        </Row>
+        {router.isFallback &&
+          <h1>Your page is getting served</h1>
+        }
+        {!router.isFallback &&
+          <Row>
+            <Col md={{size: 8, offset: 2}}>
+              <Avatar
+                title={author.name}
+                image={author.picture}
+                date={blog.createdAt}
+              />
+              <hr/>
+              <SlateView initialContent={blog.content}/>
+            </Col>
+          </Row>
+        }
       </BasePage>
     </BaseLayout>
   )
