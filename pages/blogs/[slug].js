@@ -11,6 +11,9 @@ const BlogDetail = ({blog, author}) => {
   const { data, loading } = useGetUser()
   const router = useRouter()
 
+  if (router.isFallback) {
+    return <h1>Your page is getting served</h1>
+  }
   return (
     <BaseLayout user={data} loading={loading}>
       <BasePage 
