@@ -2,7 +2,7 @@
 .port-navbar.port-default {
   width: 100%;
   z-index: 15;
-  padding: 40px;
+  padding: 30px;
 
   &.with-bg {
     background-color: #2C3E50;
@@ -56,5 +56,17 @@
       margin-left: 10px;
       margin-right: 10px;
     }
+  }
+}
+
+.port-navbar.transparent {
+  &.is-open {
+    background-color: #2C3E50;
+  }
+  &.is-close {
+    transition: 1s;
+  }
+  .port-navbar-link.active {
+    color: #2C3E50;
   }
 }

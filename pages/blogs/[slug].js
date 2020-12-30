@@ -3,15 +3,32 @@ import BasePage from 'components/BasePage'
 import { Row, Col } from 'reactstrap'
 import { useGetUser } from 'actions/user'
 import { SlateView } from 'slate-simple-editor'
+import Avatar from 'components/shared/Avatar'
 import BlogApi from 'lib/api/blogs'
+import { useRouter } from 'next/router'
 
-const BlogDetail = ({blog}) => {
+const BlogDetail = ({blog, author}) => {
   const { data, loading } = useGetUser()
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <h1>Your page is getting served</h1>
+  }
   return (
     <BaseLayout user={data} loading={loading}>
-      <BasePage className="slate-container">
+      <BasePage 
+        title={`${blog.title} - Maryna`}
+        metaDescription={blog.subTitle}
+        className="slate-container"
+      >
         <Row>
           <Col md={{size: 8, offset: 2}}>
+            <Avatar
+              title={author.name}
+              image={author.picture}
+              date={blog.createdAt}
+            />
+            <hr/>
             <SlateView initialContent={blog.content}/>
           </Col>
         </Row>
@@ -21,15 +38,16 @@ const BlogDetail = ({blog}) => {
 }
 
 export async function getStaticPaths() {
-  const json = await new BlogApi().getAll()
-  const blogs = json.data
-  const paths = blogs.map(b => ({params: {slug: b.slug}}))
-  return { paths, fallback: false }
+  const { data } = await new BlogApi().getAll()
+  const paths = data.map(({blog}) => ({params: { slug: blog.slug}}))
+  return { paths, fallback: true}
 }
 
 export async function getStaticProps({params}) {
-  const json = await new BlogApi().getBySlug(params.slug)
-  return {props: {blog: json.data}}
+  const { data: {blog, author}} = await new BlogApi().getBySlug(params.slug)
+  return {props: {blog, author}, revalidate: 1}
 }
+
+
 
 export default BlogDetail

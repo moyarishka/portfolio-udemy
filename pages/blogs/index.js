@@ -8,7 +8,7 @@ import BlogApi from 'lib/api/blogs'
 
 const Blogs = ({blogs}) => {
   const { data, loading } = useGetUser()
-  debugger
+  
   return (
     <BaseLayout
       navClass="transparent" className="blog-listing-page"
@@ -18,6 +18,7 @@ const Blogs = ({blogs}) => {
         <span className="subheading">Programming, travelling...</span>
       </Masthead>
       <BasePage
+        title="Newest Blogs - Maryna"
         className="blog-body">
         <Row>
           {
@@ -35,9 +36,10 @@ const Blogs = ({blogs}) => {
 }
 
 export async function getStaticProps() {
-  const json = await new BlogApi().getAll()
+  const { data } = await new BlogApi().getAll()
+  const blogs = data.map(item => ({...item.blog, author: item.author}))
   return {
-    props: {blogs: json.data},
+    props: {blogs},
     revalidate: 60
   }
 }
