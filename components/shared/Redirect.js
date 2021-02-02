@@ -6,11 +6,7 @@ const Redirect = ({ to, ssr }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (ssr) {
-      window.location.pathname = to
-    } else {
-      router.push(to)
-    }
+    ssr ? window.location.pathname = to : router.push(to)
   }, [])
   return null
 }

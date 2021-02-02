@@ -55,7 +55,7 @@ const Index = () => {
                     <div className="back">
                       <div className="image image-2">
                         <div className="hero-section-content">
-                          <h2>React and Next is Amazing!</h2>
+                          <h2>React and Next are Amazing!</h2>
                           <div className="hero-section-content-intro">
                             Software developer ready for a project of any type!
                           </div>
@@ -88,7 +88,7 @@ const Index = () => {
                 />
                 <div className="hero-welcome-bio">
                   <h1>
-                    Let's take a look on my work.
+                    Let's take a look at my work.
                   </h1>
                 </div>
               </Col>

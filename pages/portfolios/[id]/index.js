@@ -57,11 +57,11 @@ const Portfolio = ({portfolio}) => {
 export async function getStaticPaths() {
   const json = await new PortfolioApi().getAll()
   const portfolios = json.data
-  const paths = portfolios.map(portfolio => {
-    return {
+  const paths = portfolios.map(portfolio => (
+    {
       params: {id: portfolio._id}
     }
-  })
+  ))
 
   return { paths, fallback: true }
 }

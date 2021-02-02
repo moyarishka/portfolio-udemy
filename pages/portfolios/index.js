@@ -43,21 +43,20 @@ const Portfolios = ({portfolios: initialPortfolios}) => {
                 { dataU && isAuthorized(dataU, 'admin') &&
                   <>
                     <Button
-                      onClick={(e) => {
+                      onClick={e => {
                         e.stopPropagation()
                         router.push('/portfolios/[id]/edit', `/portfolios/${portfolio._id}/edit`)
                       }}
                       className="mr-2"
                       color="warning">Edit</Button>
                     <Button
-                      onClick={(e) => _deletePortfolio(e, portfolio._id)}
+                      onClick={e => _deletePortfolio(e, portfolio._id)}
                       color="danger">Delete</Button>
                   </>
                 }
               </PortfolioCard>
             </Col>
-          )
-          }
+          )}
         </Row>
       </BasePage>
     </BaseLayout>

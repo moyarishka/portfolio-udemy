@@ -13,21 +13,10 @@ const PortfolioEdit = ({user}) => {
   const [ updatePortfolio, {error}] = useUpdatePortfolio()
   const { data: initialData } = useGetPortfolio(router.query.id)
 
-  const _updatePortfolio = async (data) => {
-    // try {
-    //   await updatePortfolio(router.query.id, data);
-    //   toast.success('Portfolio has been updated!', {autoClose: 2000})
-    // } catch {
-    //   toast.error('Ooops some error!', {autoClose: 2000})
-    // }
-
+  const _updatePortfolio = data => 
     updatePortfolio(router.query.id, data)
       .then(() => toast.success('Portfolio has been updated!', {autoClose: 2000}))
       .catch(() => toast.error(error, {autoClose: 5000}))
-
-    // await updatePortfolio(router.query.id, data)
-    // toast.success('Portfolio has been updated!', {autoClose: 2000})
-  }
 
   return (
     <BaseLayout user={user} loading={false}>
@@ -40,9 +29,6 @@ const PortfolioEdit = ({user}) => {
                 initialData={initialData}
               />
             }
-            {/* { error &&
-              <div className="alert alert-danger mt-2">{error}</div>
-            } */}
           </Col>
         </Row>
       </BasePage>

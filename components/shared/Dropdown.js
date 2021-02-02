@@ -17,14 +17,12 @@ export default class PortButtonDropdown extends React.Component {
     })
   }
 
-  // TODO: Pass on item ID, don't use INDEX
   renderMenu(items) {
     return (
       <DropdownMenu>
         {
-          items.map((item) => (
+          items.map(item => 
             <DropdownItem key={item.key} {...item.handlers}>{item.text}</DropdownItem>
-          )
           )
         }
       </DropdownMenu>

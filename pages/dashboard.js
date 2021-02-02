@@ -12,7 +12,7 @@ const Dashboard = ({user, loading}) => {
   const [updateBlog] = useUpdateBlog()
   const {data: blogs, mutate} = useGetUserBlogs()
 
-  const changeBlogStatus = async (blogId, status) => {
+  const changeBlogStatus = (blogId, status) => {
     updateBlog(blogId, {status})
       .then(() => mutate())
       .catch(() => toast.error('Something went wrong...'))
